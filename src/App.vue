@@ -1,17 +1,77 @@
+
+<!-- HTML 관리 -->
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App - hello wordld why I can't connect git"/>
+    <hr>
+    <!-- 키 명을 그대로 이용하면 된다. -->
+    <p v-bind:style="스타일">{{인삿말}}</p>
+    <hr>
+    <!-- for 문 : 개체명 in 반복시킬 횟수 => {{개체명}} -->
+    <li v-bind:style="post_css" v-for="메뉴 in 메뉴들" :key="메뉴">{{메뉴}}</li>
+    <hr>
+    <!--
+    <li v-for="메뉴 in [1,2,3,4,5]" :key="메뉴">{{메뉴}}</li>
+    -->
+    <!-- 이런식으로 반복이 가능하다 오! -->
+    <div v-bind:style="post_css" v-for="post in posts" :key="post">
+      <h4>{{post.title}}</h4>
+      <p>{{post.date}}</p>
+      <br>
+    </div>
+    <hr>
+    <!-- 강의 내용 : 각각의 내용을 따로 뽑아내야 될 경우. -->
+    <div v-bind:style="post_css">
+      <h4>{{posts[0].title}}</h4>
+      <p>{{posts[1].date}}</p>
+      <br>
+    </div>    
+
+
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
 
+
+<!-- 스크립트 관리 -->
+<script>
+/* 
+ * 뷰가 왠만한건 관리해준다.
+ * 스크립트 건들 일이 없다. 
+ * 뷰로 데이터를 관리한다. 즉 바인딩만 잘해준다.
+ * 모든 설정이 data안에 설정이 가능하다!
+ */
 export default {
   name: 'app',
+  //데이터 보관 장소 : 여기 키로 설정 된 이름 그대로 템플릿에 이용하면 됨!
+  //데이터를 관리하는 것이 핵심이다.
+  data() {
+     return {
+        //TEXT 
+        인삿말 : '안뇽 뷰는 처음이지?',
+        //CSS
+        스타일 : 'font-size : 30px; text-align:left;',
+        //배열
+        메뉴들 : ['아우터','셔츠','언더웨어','스포츠웨어'],
+        //JSON 데이터
+        posts : [
+                  {
+                    title : '오늘의 일기',
+                    date : '4월 20일'
+                  },
+                  {
+                    title : '수분크림 추천',
+                    date : '3월 4일'
+                  },
+                  {
+                    title : '강남 맛집 후기',
+                    date : '2월 22일'
+                  }
+                ],
+        post_css : 'text-align : left;'
+     }
+  },
   components: {
-    HelloWorld
   }
 }
 </script>
