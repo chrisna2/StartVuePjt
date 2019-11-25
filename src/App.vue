@@ -5,13 +5,8 @@
     <img src="./assets/logo.png" width="50px">동산
     <div class="row">
       <div class="col-md-2">
-        <List />
+        <List :key="원룸들" v-bind:원룸들="원룸들" v-on:sortPrice="sortPrice" v-on:under50="under50" v-on:resetList="resetList"/>
         <hr>
-        <ul class="list-group">
-          <li class="list-group-item" v-on:click="sortPrice()">가격순정렬</li>
-          <li class="list-group-item" v-on:click="under50()">50만원이하</li>
-          <li class="list-group-item">원래대로</li>
-        </ul>
       </div>
       <div class="col-md-10">
         <div class="row">
@@ -28,15 +23,17 @@
 import Card from './components/Card.vue';
 import List from './components/List.vue';
 import data from './components/data.js';
+
 export default {
   name: 'app',
   //데이터 보관 장소 : 여기 키로 설정 된 이름 그대로 템플릿에 이용하면 됨!
   //데이터를 관리하는 것이 핵심이다.
   data() {
      return {
-       //TEXT 
+        //TEXT 
         인삿말 : '안뇽 뷰는 처음이지?',
         원룸들 : data
+        //[1] 리셋을 해도 순서가 바뀌지 않는다
      }
   },
   //컴포넌트 순서 
@@ -81,7 +78,7 @@ export default {
       //json 인 경우 a, b는 각각의 json 객체의 값이다.
       this.원룸들.sort(
         function(a,b){
-          //정렬함수(암기) -> 추가로 html을 수정 해줄 필요가 없다. 알아서 재 랜더링 해준다.
+          //정렬함수(암기) -> 추가로 html을 수정 해줄 필요가 없다. 알아서 재랜더링 해준다.
           return a.price-b.price;
         }
       );
@@ -93,10 +90,17 @@ export default {
           return item.price < 500000;
         });
       this.원룸들 = newOneRomms;
-    }
+    },
     //[3] 숙제(1) 원래되로 버튼 만들기
-
-
+    resetList(){
+      //[2] 문제 : 순서까지 원래대로 만들어야 한다.
+      this.원룸들.sort(function(a,b){
+          return a.id - b.id;
+      });
+      //[1] 사라진 데이터가 복구된다. -> (질문.)순서는 복구가 안된다...
+      //두번 클릭해야 된다...위아래 순서가 뒤바뀌면 없어진게 나오지 않는다...이거 하나로 정리가 되지 않는다..
+      Object.assign(this.$data, this.$options.data());
+    }
   }
 }
 </script>

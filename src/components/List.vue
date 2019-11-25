@@ -5,16 +5,28 @@
 <template>
   <div>
     <ul class="list-group">
-      <li class="list-group-item">가격순정렬</li>
-      <li class="list-group-item">50만원이하</li>
-      <li class="list-group-item">원래대로</li>
+      <li class="list-group-item" v-on:click="sortPrice()">가격순정렬</li>
+      <li class="list-group-item" v-on:click="under50()">50만원이하</li>
+      <li class="list-group-item" v-on:click="resetList()">원래대로</li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-
+    props: {
+    },
+    methods: {
+      sortPrice: function() {
+        this.$emit('sortPrice');
+      },
+      under50: function() {
+        this.$emit('under50');
+      },
+      resetList: function() {
+        this.$emit('resetList');
+      }
+    }
 }
 </script>
 
