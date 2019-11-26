@@ -3,19 +3,32 @@
   <div class="container">
     <!--항상 이미지의 경로는 ./로 시작한다-->
     <img src="./assets/logo.png" width="50px">동산
-    <div class="row">
+    <br>
+    <button v-for="(tab,index) in tabs" :key="index"
+            v-bind:class="{active: currentTab == index}" 
+            v-on:click="currentTab = index">{{tab}}</button>  
+
+    <div class="row" v-show="currentTab==0">
       <div class="col-md-2">
         <List :key="원룸들" v-bind:원룸들="원룸들" v-on:sortPrice="sortPrice" v-on:under50="under50" v-on:resetList="resetList"/>
         <hr>
       </div>
       <div class="col-md-10">
         <div class="row">
-          <!-- 데이터 전송 -->
-          <Card v-for="room in 원룸들" :key="room" v-bind:원룸들="room" />
-          <Card v-for="(room,i) in 원룸들" v-bind:원룸들="room[2]" :key=i />
+            <!-- 데이터 전송 -->
+            <Card v-for="room in 원룸들" :key="room" v-bind:원룸들="room" />
         </div>
       </div>
     </div>
+
+    <div class="row" v-show="currentTab==1">
+      아파트 정보 
+    </div>
+    
+    <div class="row" v-show="currentTab==2">
+      단독주택 정보 
+    </div>
+    
   </div>
 </template>
 <!-- 스크립트 관리 -->
@@ -32,8 +45,10 @@ export default {
      return {
         //TEXT 
         인삿말 : '안뇽 뷰는 처음이지?',
-        원룸들 : data
+        원룸들 : data,
         //[1] 리셋을 해도 순서가 바뀌지 않는다
+        currentTab : 0,
+        tabs : ['원룸들', '아파트틀', '빌라들']
      }
   },
   //컴포넌트 순서 
