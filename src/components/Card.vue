@@ -1,6 +1,7 @@
 <template>
     <div class="col-md-6">
-        <img v-bind:src="원룸들.image" width="100%"/>
+        <!-- 몰래 데이터를 담을수 있다. data-id : id라는 이름은 마음대로 핵심은 data- -->
+        <img v-bind:data-id="원룸들.id" v-bind:src="원룸들.image" width="100%"/>
         <h4>제목 : {{원룸들.title}}</h4>
         <h4>특징 : {{원룸들.caption}}</h4>
         <h5>가격 : {{원룸들.price}}원</h5>
