@@ -34,7 +34,7 @@
 
     <div class="row" v-show="currentTab==0">
       <div class="col-md-2">
-        <List :key="원룸들" v-bind:원룸들="원룸들" v-on:sortPrice="sortPrice" v-on:under50="under50" v-on:resetList="resetList"/>
+        <List v-on:sortPrice="sortPrice" v-on:under50="under50" v-on:resetList="resetList"/>
       </div>
       <div class="col-md-10">
         <div class="row">
@@ -46,7 +46,7 @@
 
     <div class="row" v-show="currentTab==1">
       <div class="col-md-2">
-        <List :key="원룸들" v-bind:원룸들="원룸들" v-on:sortPrice="sortPrice" v-on:under50="under50" v-on:resetList="resetList"/>
+        <List v-on:sortPrice="sortPrice" v-on:under50="under50" v-on:resetList="resetList"/>
       </div>
       <div class="col-md-10">
         <div class="row">
@@ -57,7 +57,7 @@
     
     <div class="row" v-show="currentTab==2">
       <div class="col-md-2">
-        <List :key="원룸들" v-bind:원룸들="원룸들" v-on:sortPrice="sortPrice" v-on:under50="under50" v-on:resetList="resetList"/>
+        <List v-on:sortPrice="sortPrice" v-on:under50="under50" v-on:resetList="resetList"/>
       </div>
       <div class="col-md-10">
         <div class="row">
